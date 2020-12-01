@@ -1,28 +1,31 @@
 import re
 
 
-def main():
+def regular_expression(text_input):
 
-    text = ""
+    text = str(text_input)
     pattern = re.compile(r"(?:[^,.?!]+[,]){2}[^.?!]+[.?!]")
 
-    with open("./Macbeth.txt") as file:
-        text = file.read()
-
-    # print(text)
-
     match_list = re.findall(pattern, text)
-    #print(match_list)
-
+    
     matches = ""
 
     for match in match_list:
-        matches = matches + match + "|" + "\n"
+        matches = matches + match
 
-    with open("./output.txt", "w") as file:
-        file.write(matches)
+    return matches
+
+
+def main():
+    with open("Macbeth.txt", "r") as file:
+        text_input = file.read()
+
+    text_output = regular_expression(text_input)
+
+    with open("output.txt", "w") as file:
+        file.write(text_output)
+    
 
 
 if __name__ == "__main__":
     main()
-    print("ready")
